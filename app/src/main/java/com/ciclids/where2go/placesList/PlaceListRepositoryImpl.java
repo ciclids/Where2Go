@@ -43,7 +43,7 @@ public class PlaceListRepositoryImpl implements PlaceListRepository {
     @Override
     public void getAllPlaces(Double lat, Double lon) {
         String strLocation = String.valueOf(lat) + "," + String.valueOf(lon);
-        Call<PlacesResponse> call = service.searchAll("es", strLocation, BuildConfig.FSQ_API, BuildConfig.FSQ_SECRET, 20160110, true);
+        Call<PlacesResponse> call = service.searchAll("es", strLocation, BuildConfig.FSQ_API, BuildConfig.FSQ_SECRET, 20160707, 100000);
         callingAll(call);
     }
 
@@ -59,7 +59,7 @@ public class PlaceListRepositoryImpl implements PlaceListRepository {
     @Override
     public void getExploreQuery(Double lat, Double lon, String query) {
         String strLocation = String.valueOf(lat) + "," + String.valueOf(lon);
-        Call<PlacesResponseExplore> call = service.explore("es", strLocation, query, BuildConfig.FSQ_API, BuildConfig.FSQ_SECRET, 20160110, "true");
+        Call<PlacesResponseExplore> call = service.explore("es", strLocation, query, BuildConfig.FSQ_API, BuildConfig.FSQ_SECRET, 20160701, "true");
         callingExplorer(call);
     }
 
@@ -77,7 +77,7 @@ public class PlaceListRepositoryImpl implements PlaceListRepository {
 
                     for (Venue venue : venues) {
                         try {
-                            if (venue.isVerified()) {
+
                                 Double[] loc = {venue.getLocation().getLat(), venue.getLocation().getLng()};
 
                                 String icon = venue.getCategories().get(0).getIcon().getPrefix() + "bg_32.png";
@@ -98,7 +98,7 @@ public class PlaceListRepositoryImpl implements PlaceListRepository {
                                 ));
 
                                 orderByCat(places);
-                            }
+
                         } catch (Exception e) {
                             Log.e("error de listado", e.getLocalizedMessage());
                         }

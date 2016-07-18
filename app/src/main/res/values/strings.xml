@@ -6,6 +6,7 @@
     <string name="main_title_map">Mapa</string>
     <string name="welcome_main">Donde vamos ?</string>
     <string name="error_connection_repo">error de repo</string>
-    <string name="fsq_info_txt">Datos de Foursquare</string>
+    <string name="fsq_info_txt">Datos cortesía de Foursquare</string>
     <string name="title_activity_maps">Map</string>
+    <string name="error_de_acceso">Error al acceder</string>
 </resources>

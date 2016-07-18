@@ -22,7 +22,7 @@ public interface PlacesService {
                                    @Query("client_id") String clientID,
                                    @Query("client_secret") String clientSecret,
                                    @Query("v") int versionDate,
-                                   @Query("openNow") Boolean open);
+                                   @Query("radius")int radius);
 
     @GET("explore")
     Call<PlacesResponseExplore> explore(@Query("lang") String lang,

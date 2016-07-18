@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,12 +24,10 @@ import com.ciclids.where2go.Where2goAppModule;
 import com.ciclids.where2go.entities.Place;
 import com.ciclids.where2go.lib.EvntBus;
 import com.ciclids.where2go.lib.di.LibsModule;
-import com.ciclids.where2go.placeActivity.PlaceActivity;
 import com.ciclids.where2go.placesList.PlaceListPresenter;
 import com.ciclids.where2go.placesList.adapters.PlaceListAdapter;
 import com.ciclids.where2go.placesList.di.DaggerPlacesComponent;
 import com.ciclids.where2go.placesList.di.PlacesModule;
-import com.ciclids.where2go.placesList.events.PlacesEvent;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -75,12 +74,11 @@ public class PlacesFragment extends Fragment implements PlaceView, OnPlaceClickL
 
     @Override
     public void onPlaceClicked(Place place) {
-        Intent intent = new Intent(this.getContext(), PlaceActivity.class);
-        startActivity(intent);
-        PlacesEvent event = new PlacesEvent();
-        event.setType(event.TYPE_UNIQUE);
-        event.setPlace(place);
-        eventBus.post(event);
+
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(place.getUrl()));
+        startActivity(i);
+
 
 
     }
@@ -131,6 +129,11 @@ public class PlacesFragment extends Fragment implements PlaceView, OnPlaceClickL
             // Or use LocationManager.GPS_PROVIDER
             LocationManager locationManager = (LocationManager) this.getActivity().getSystemService(Context.LOCATION_SERVICE);
             lastLocation = locationManager.getLastKnownLocation(locationProvider);
+           // presenter.getPlaces(lastLocation);
+
+            lastLocation.setLatitude(39.4695969);
+            lastLocation.setLongitude(-0.371201);
+
             presenter.getPlaces(lastLocation);
         }
 

@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:cropToPadding="true"
         android:padding="10dp"
-        android:src="@drawable/whirl" />
+        android:src="@mipmap/whirl" />
 
     <TextView
         android:id="@+id/place_list_priText"
